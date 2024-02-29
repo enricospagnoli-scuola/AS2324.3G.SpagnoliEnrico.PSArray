@@ -10,6 +10,7 @@ class Program
         int[] pesi = new int[dim];
         int nVoti = dim;
         StampaVotiPesi(voti, pesi, nVoti);
+        StampaVotiDispariMaggiori4(ref voti, ref pesi, nVoti);
     }
     static void StampaVotiPesi(double[] voti, int[] pesi, int nVoti)
     {
@@ -26,6 +27,20 @@ class Program
         {
             voti[i] = random.Next(1, 11);
             pesi[i] = random.Next(0, 101);
+        }
+    }
+    static void StampaVotiDispariMaggiori4(ref double[] voti, ref int[] pesi, int nVoti)
+    {
+        Console.WriteLine("Voti in posizione dispari e maggiori di 4:");
+        for (int i = 0; i < pesi.Length; i++)
+        {
+            if (i % 2 == 0)
+            {
+                if (voti[i] > 4)
+                {
+                    Console.WriteLine($"{voti[i]}");
+                }
+            }
         }
     }
 }
