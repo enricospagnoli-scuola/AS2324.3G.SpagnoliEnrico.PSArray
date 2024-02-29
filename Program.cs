@@ -15,6 +15,9 @@ class Program
         StampaVotiDispariMaggiori4(ref voti, ref pesi, nVoti);
         double ris = MediaPonderata(voti, pesi, ref max, ref posMax, ref min, ref posMin);
         Console.WriteLine($"Media ponderata: {ris} Min: {min} Max: {max}");
+        Console.Write("Inserire il voto da cercare: ");
+        int voto = Convert.ToInt32(Console.ReadLine());
+        ElencoVotiNellIntorno(voti, pesi, nVoti, voto);
     }
     static void StampaVotiPesi(double[] voti, int[] pesi, int nVoti)
     {
@@ -70,5 +73,16 @@ class Program
         }
         double ris = sommaVotiPesati / sommaPesi;
         return ris;
+    }
+    static void ElencoVotiNellIntorno(double[] voti, int[] pesi, int nVoti, int voto)
+    {
+        Console.WriteLine("Voti nell'intorno:");
+        for (int i = 0; i < pesi.Length; i++)
+        {
+            if ((voti[i] >= (voto - 0.5) && voti[i] <= voto) || (voti[i] <= (voto + 0.5) && voti[i] >= voto))
+            {
+                Console.WriteLine($"{voti[i]}");
+            }
+        }
     }
 }
