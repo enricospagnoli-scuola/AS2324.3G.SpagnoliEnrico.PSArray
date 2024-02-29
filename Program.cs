@@ -8,6 +8,7 @@ class Program
         int dim = Convert.ToInt32(Console.ReadLine());
         double[] voti = new double[dim];
         int[] pesi = new int[dim];
+        int[] array = new int [dim];
         int nVoti = dim;
         double min = 0, max = 0;
         int posMin = 0, posMax = 0;
@@ -18,6 +19,12 @@ class Program
         Console.Write("Inserire il voto da cercare: ");
         int voto = Convert.ToInt32(Console.ReadLine());
         ElencoVotiNellIntorno(voti, pesi, nVoti, voto);
+        Console.WriteLine("Selection Sort:");
+        SelectionSort(array, voti, pesi);
+        for (int i = 0; i < pesi.Length; i++)
+        {
+            Console.WriteLine($"Voto: {voti[i]} Peso: {pesi[i]}");
+        }
     }
     static void StampaVotiPesi(double[] voti, int[] pesi, int nVoti)
     {
@@ -32,7 +39,7 @@ class Program
         Random random = new Random();
         for (int i = 0; i < nVoti; i++)
         {
-            voti[i] = random.Next(1, 11);
+            voti[i] = random.NextDouble()*10+1;
             pesi[i] = random.Next(0, 101);
         }
     }
@@ -83,6 +90,21 @@ class Program
             {
                 Console.WriteLine($"{voti[i]}");
             }
+        }
+    }
+    static void SelectionSort(int[] array, double[] voti, int[] pesi)
+    {
+        for (int i = 0; i < pesi.Length; i++)
+        {
+            int minIndex = i;
+            for (int j = i + 1; j < pesi.Length; j++)
+            {
+                if (array[j] < array[minIndex])
+                    minIndex = j;
+            }
+            int temp = array[i];
+            array[i] = array[minIndex];
+            array[minIndex] = temp;
         }
     }
 }
