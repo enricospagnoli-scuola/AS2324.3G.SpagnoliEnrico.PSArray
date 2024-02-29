@@ -9,8 +9,12 @@ class Program
         double[] voti = new double[dim];
         int[] pesi = new int[dim];
         int nVoti = dim;
+        double min = 0, max = 0;
+        int posMin = 0, posMax = 0;
         StampaVotiPesi(voti, pesi, nVoti);
         StampaVotiDispariMaggiori4(ref voti, ref pesi, nVoti);
+        double ris = MediaPonderata(voti, pesi, ref max, ref posMax, ref min, ref posMin);
+        Console.WriteLine($"Media ponderata: {ris} Min: {min} Max: {max}");
     }
     static void StampaVotiPesi(double[] voti, int[] pesi, int nVoti)
     {
@@ -42,5 +46,29 @@ class Program
                 }
             }
         }
+    }
+    static double MediaPonderata(double[] voti, int[] pesi, ref double max, ref int posMax, ref double min, ref int posMin)
+    {
+        double sommaVotiPesati = 0;
+        double sommaPesi = 0;
+        max = voti[0];
+        min = voti[0];
+        for (int i = 0; i < pesi.Length; i++)
+        {
+            sommaVotiPesati += voti[i] * pesi[i];
+            sommaPesi += pesi[i];
+            if (voti[i] > max)
+            {
+                max = voti[i];
+                posMax = i;
+            }
+            if (voti[i] < min)
+            {
+                min = voti[i];
+                posMin = i;
+            }
+        }
+        double ris = sommaVotiPesati / sommaPesi;
+        return ris;
     }
 }
